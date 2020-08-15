@@ -36,13 +36,13 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | Jump Box | Gateway  | 10.0.0.4   | Linux            |
 | web-01   | Server         | 10.0.06           | Linux                 |
 | web-02   | Server         | 10.0.07           | Linux                 |
-| elk-server | Server   | 10.1.0.4           | Linux   |
+| elk-server | Log Server   | 10.1.0.4           | Linux   |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the jump box provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - _TODO: Add whitelisted IP addresses_
 
 Machines within the network can only be accessed by _____.
