@@ -43,8 +43,9 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the jump box provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
- -my personal IP address
- -72.46.195.191
+
+ - my personal IP address
+ - 72.46.195.191
 
 Machines within the network can only be accessed by the Jump Box. The Elk Machine can have access from 72.46.195.191 through port 5601.
 
