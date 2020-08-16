@@ -68,7 +68,7 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - installs docker, python, and the docker module.
-'''bash   
+    '''bash
     # Use apt module
     - name: Install docker.io
       apt:
