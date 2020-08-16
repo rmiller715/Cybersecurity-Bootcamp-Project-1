@@ -27,7 +27,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 Load balancers help ensure environment availability through distribution of incoming data to web servers. Jump boxes allow for more easy administration of multiple systems 
-and provide an additional layer between outside and internal assets.
+and provide an additional layer between the outside and internal assets.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the event logs and system metrics.
 - Filbeats watch for log directories or specific log files. 
@@ -49,8 +49,7 @@ The machines on the internal network are not exposed to the public Internet.
 
 Only the jump box provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
- - my personal IP address
- - 72.46.195.191 (the load balancer's IP address)
+ - 72.46.195.191 
 
 Machines within the network can only be accessed by the Jump Box. The Elk Machine can have access from 72.46.195.191 through port 5601.
 
@@ -136,21 +135,24 @@ We have installed the following Beats on these machines:
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
-- Filebeat is a log data shipper for local files. Installed as an agent on your servers, Filebeat monitors the log directories or specific log files, tails the files, and forwards them either to Elasticsearch or Logstash for indexing. E.g., kibana.log collects log data on the state of kibana.
+- Filebeat is a log data shipper for local files. Installed as an agent on your servers, Filebeat monitors the log directories or specific log files, tails the files, and forwards them either to Elasticsearch or Logstash for indexing. E.g., kibana.log collects log data on kabana.
 - Metricbeat collects metrics and statistics on the system. E.g., cpu usage, which can be used to monitor the system health.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the playbook, install-elk.yml, to /etc/ansible/roles.
-- Update the /etc/ansible/hosts file to include the IP address for the elk server.
-- Run the playbook, and navigate to http://[Elk Server Public IP]:5601/app/kibana to check that the installation worked as expected.
+- Copy the playbook, Install-Elk.yml, to /etc/ansible/roles.
+- Update the /etc/ansible/hosts file to include the IP address of the Elk Server VM.
+- Run the playbook, and navigate to http://[Elk_VM_Public_IP]:5601/app/kibana to check that the installation worked as expected.
 
 - _Which file is the playbook? Where do you copy it?_
 The Filebeat-configuration is the playbook and you copy the /etc/ansible/file/filebeat-configuration.yml to the destination of the webserver's /etc/filebeat/filebeat.yml
+
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
 Edit the /etc/ansible/host file to add webserver/elkserver ip addresses
+
 - _Which URL do you navigate to in order to check that the ELK server is running?
+http://[your.ELK-VM.External.IP]:5601/app/kibana.
 
 
