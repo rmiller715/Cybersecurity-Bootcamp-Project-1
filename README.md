@@ -95,7 +95,7 @@ The playbook implements the following tasks:
     - name: Increase virtual memory
       command: sysctl -w vm.max_map_count=262144
 ```
--uses sysctl module
+- uses sysctl module
 ```bash
   # Use sysctl module
     - name: Use more memory
@@ -125,15 +125,17 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-Web-1 (10.0.0.6)
-Web-2 (10.0.0.7)
+- Web-1 (10.0.0.6)
+- Web-2 (10.0.0.7)
 
 We have installed the following Beats on these machines:
-FileBeat
-Metric Beat
+- FileBeat
+- Metric Beat
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat collects log data and other specified data. E.g., kibana.log collects log data on the state of kibana.
+- Metricbeat collects metrics and statistics on the system. E.g., system module monitors cpu, load, memory etc, which can be used to monitor how the system is running.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
