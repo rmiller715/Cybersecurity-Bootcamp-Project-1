@@ -142,17 +142,85 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the playbook, Install-Elk.yml, to /etc/ansible/roles.
-- Update the /etc/ansible/hosts file to include the IP address of the Elk Server VM.
+- Copy the configuration file from your Ansible container to your Web VM's 
+- Update the /etc/ansible/hosts file to include the IP address of the Elk Server VM and webservers.
 - Run the playbook, and navigate to http://[Elk_VM_Public_IP]:5601/app/kibana to check that the installation worked as expected.
 
-- _Which file is the playbook? Where do you copy it?_
-The Filebeat-configuration is the playbook and you copy the /etc/ansible/file/filebeat-configuration.yml to the destination of the webserver's /etc/filebeat/filebeat.yml
+- _Which file is the playbook? 
+The Filebeat-configuration
+
+- _Where do you copy it?_
+copy /etc/ansible/files/filebeat-config.yml to /etc/filebeat/filebeat.yml
 
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-Edit the /etc/ansible/host file to add webserver/elkserver ip addresses
+update filebeat-config.yml -- specify which machine to install 
 
 - _Which URL do you navigate to in order to check that the ELK server is running?
 http://[your.ELK-VM.External.IP]:5601/app/kibana.
 
+filebeats
+```bash
+- name: Installing and Launch Filebeat
+  hosts: webservers
+  become: yes
+  tasks:
+    # Use command module
+  - name: Download filebeat .deb file
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
 
+    # Use command module
+  - name: Install filebeat .deb
+    command: dpkg -i filebeat-7.4.0-amd64.deb
+
+    # Use copy module
+  - name: Drop in filebeat.yml
+    copy:
+      src: /etc/ansible/files/filebeat-config.yml
+      dest: /etc/filebeat/filebeat.yml
+
+    # Use command module
+  - name: Enable and Configure System Module
+    command: filebeat modules enable system
+
+    # Use command module
+  - name: Setup filebeat
+    command: filebeat setup
+
+    # Use command module
+  - name: Start filebeat service
+    command: service filebeat start
+
+```
+
+metricbeats
+```bash
+- name: Install metric beat
+  hosts: webservers
+  become: true
+  tasks:
+    # Use command module
+  - name: Download metricbeat
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
+
+    # Use command module
+  - name: install metricbeat
+    command: dpkg -i metricbeat-7.4.0-amd64.deb
+
+    # Use copy module
+  - name: drop in metricbeat config
+    copy:
+      src: /etc/ansible/files/metricbeat-config.yml
+      dest: /etc/metricbeat/metricbeat.yml
+
+    # Use command module
+  - name: enable and configure docker module for metric beat
+    command: metricbeat modules enable docker
+
+    # Use command module
+  - name: setup metric beat
+    command: metricbeat setup
+
+    # Use command module
+  - name: start metric beat
+    command: service metricbeat start
+```
