@@ -153,7 +153,7 @@ The Filebeat-configuration
 copy /etc/ansible/files/filebeat-config.yml to /etc/filebeat/filebeat.yml
 
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-update filebeat-config.yml -- specify which machine to install 
+update filebeat-config.yml -- specify which machine to install by updating the host files with ip addresses of web/elk servers and selecting which group to run on in ansible
 
 - _Which URL do you navigate to in order to check that the ELK server is running?
 http://[your.ELK-VM.External.IP]:5601/app/kibana.
