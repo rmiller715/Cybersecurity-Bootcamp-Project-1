@@ -90,8 +90,35 @@ The playbook implements the following tasks:
         state: present
 ```   
 - increases the virtual memory on the VM that will run ELK.
-- downloads and launches the docker container for elk and launches it.
-
+```bash
+  # Use command module
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+```
+-uses sysctl module
+```bash
+  # Use sysctl module
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        state: present
+        reload: yes
+```
+- downloads and launches the docker container for elk 
+```bash
+# Use docker_container module
+    - name: download and launch a docker elk container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+          - 5601:5601
+          - 9200:9200
+          - 5044:5044
+```
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 ![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
