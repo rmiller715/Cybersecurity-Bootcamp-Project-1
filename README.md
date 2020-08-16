@@ -146,7 +146,7 @@ SSH into the control node and follow the steps below:
 - Update the /etc/ansible/hosts file to include the IP address of the Elk Server VM and webservers.
 - Run the playbook, and navigate to http://[Elk_VM_Public_IP]:5601/app/kibana to check that the installation worked as expected.
 
-- _Which file is the playbook? 
+- _Which file is the playbook?_ 
 The Filebeat-configuration
 
 - _Where do you copy it?_
