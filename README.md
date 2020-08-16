@@ -1,3 +1,5 @@
+Ryan Miller
+
 ## Automated ELK Stack Deployment
 
 The files in this repository were used to configure the network depicted below.
@@ -11,7 +13,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - [Filebeat playbook](https://github.com/rmiller715/Cybersecurity-Bootcamp-Project-1/blob/master/Ansible/Filebeat-playbook.yml)
 
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
@@ -28,7 +30,7 @@ Load balancers help ensure environment availability through distribution of inco
 and provide an additional layer between outside and internal assets.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the event logs and system metrics.
-- Filbeats watch for log files. 
+- Filbeats watch for log directories or specific log files. 
 - Metricbeat helps you monitor your servers by collecting metrics from the system and services running on the server.
 
 The configuration details of each machine may be found below.
@@ -36,10 +38,10 @@ The configuration details of each machine may be found below.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.4   | Linux            |
-| web-01   | Server         | 10.0.06           | Linux                 |
-| web-02   | Server         | 10.0.07           | Linux                 |
-| elk-server | Log Server   | 10.1.0.4           | Linux   |
+| Jump Box | Gateway  | 10.0.0.4   | Linux (Ubuntu)            |
+| Web 1   | Server         | 10.0.06           | Linux (Ubuntu)              |
+| Web 2   | Server         | 10.0.07           | Linux (Ubuntu)               |
+| ELK Server | Log Server   | 10.1.0.4           | Linux (Ubuntu)  |
 
 ### Access Policies
 
@@ -57,9 +59,9 @@ A summary of the access policies in place can be found in the table below.
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
 | Jump Box | Yes            | 72.46.195.191    |
-| load balancer | Yes     | Open |
-| Web-1         | No                    |  10.0.0.6                    |
-| Web-2         | No                    |  10.0.0.7                    |
+| Load Balancer | Yes     | Open |
+| Web 1         | No                    |  10.0.0.6                    |
+| Web 2         | No                    |  10.0.0.7                    |
 | ELK Server  |    Yes     |   72.46.192.191    |
 
 ### Elk Configuration
@@ -67,7 +69,7 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because servcies running can be limited, system installation and update can be streamlined, and processes become more replicable. 
 
 The playbook implements the following tasks:
-- installs docker, python, and the docker module.
+- installs docker.io, pip3, and the docker module.
 ```bash
   # Use apt module
     - name: Install docker.io
@@ -89,7 +91,7 @@ The playbook implements the following tasks:
         name: docker
         state: present
 ```   
-- increases the virtual memory on the VM that will run ELK.
+- increases the virtual memory (for the virtual machine we will use to run the ELK server)
 ```bash
   # Use command module
     - name: Increase virtual memory
@@ -105,7 +107,7 @@ The playbook implements the following tasks:
         state: present
         reload: yes
 ```
-- downloads and launches the docker container for elk 
+- downloads and launches the docker container for elk server 
 ```bash
 # Use docker_container module
     - name: download and launch a docker elk container
