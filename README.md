@@ -39,8 +39,8 @@ The configuration details of each machine may be found below.
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
 | Jump Box | Gateway  | 10.0.0.4   | Linux (Ubuntu)            |
-| Web 1   | Server         | 10.0.06           | Linux (Ubuntu)              |
-| Web 2   | Server         | 10.0.07           | Linux (Ubuntu)               |
+| Web 1   | Server         | 10.0.05           | Linux (Ubuntu)              |
+| Web 2   | Server         | 10.0.06          | Linux (Ubuntu)               |
 | ELK Server | Log Server   | 10.1.0.4           | Linux (Ubuntu)  |
 
 ### Access Policies
@@ -49,8 +49,7 @@ The machines on the internal network are not exposed to the public Internet.
 
 Only the jump box provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
- -your personal IP adress
- - 72.46.195.191  (Load Balancer's IP address)
+ -Personal IP address
 
 Machines within the network can only be accessed by the Jump Box. The Elk Machine can have access from 72.46.195.191 through port 5601.
 
@@ -58,11 +57,11 @@ A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes            | 72.46.195.191    |
+| Jump Box | Yes            | Personal    |
 | Load Balancer | Yes     | Open |
-| Web 1         | No                    |  10.0.0.6                    |
-| Web 2         | No                    |  10.0.0.7                    |
-| ELK Server  |    Yes     |   72.46.192.191    |
+| Web 1         | No                    |  10.0.0.5                   |
+| Web 2         | No                    |  10.0.0.6                    |
+| ELK Server  |    Yes     |   Personal    |
 
 ### Elk Configuration
 
